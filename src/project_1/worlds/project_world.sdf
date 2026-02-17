@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="project_world">
+
+    <!-- Ground -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Sun -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+  </world>
+</sdf>
