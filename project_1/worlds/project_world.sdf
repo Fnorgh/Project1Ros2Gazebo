@@ -48,6 +48,12 @@
       </attenuation>
       <direction>-0.5 0.1 -0.9</direction>
     </light>
+	
+	<include>
+  		<uri>model://../models/turtlebot4</uri>
+  		<pose>0 0 0 0 0 0</pose>
+	</include>
+
 
   </world>
 </sdf>

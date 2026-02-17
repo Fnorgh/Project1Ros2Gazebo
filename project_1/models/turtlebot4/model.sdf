@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="turtlebot4">
+    <link name="base_link">
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://turtlebot4/meshes/shell.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.2</radius>
+            <length>0.15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
