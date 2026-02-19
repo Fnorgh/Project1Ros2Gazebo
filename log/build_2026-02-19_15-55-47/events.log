@@ -1,0 +1,55 @@
+[0.000000] (-) TimerEvent: {}
+[0.000153] (project_1) JobQueued: {'identifier': 'project_1', 'dependencies': OrderedDict()}
+[0.000207] (project_1) JobStarted: {'identifier': 'project_1'}
+[0.099354] (-) TimerEvent: {}
+[0.199610] (-) TimerEvent: {}
+[0.299835] (-) TimerEvent: {}
+[0.400080] (-) TimerEvent: {}
+[0.500328] (-) TimerEvent: {}
+[0.600572] (-) TimerEvent: {}
+[0.674091] (project_1) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../build/project_1', 'build', '--build-base', '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build', 'install', '--record', '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1', 'env': {'GZ_SIM_RESOURCE_PATH': '/opt/ros/jazzy/share', 'USER': 'fnorgh', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'STARSHIP_SHELL': 'fish', 'XDG_SEAT': 'seat0', 'XDG_SESSION_TYPE': 'x11', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/fnorgh', 'TERMINFO': '/usr/lib/kitty/terminfo', 'DESKTOP_SESSION': 'i3', 'KITTY_INSTALLATION_DIR': '/usr/lib/kitty', 'GTK_MODULES': 'gail:atk-bridge', 'ROS_PYTHON_VERSION': '3', 'KITTY_PID': '4284', 'GSM_SKIP_SSH_AGENT_WORKAROUND': 'true', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'ROS_DISTRO': 'jazzy', 'GTK_IM_MODULE': 'ibus', 'LOGNAME': 'fnorgh', 'WINDOWID': '48234510', 'XDG_SESSION_CLASS': 'user', 'ROS_VERSION': '2', 'XDG_SESSION_ID': '1', 'USERNAME': 'fnorgh', 'TERM': 'xterm-kitty', 'KITTY_PUBLIC_KEY': '1:qxEsyTPc3!5+_}S+WN4u_=Rw%L|R$|-MmguhCE1K', 'WINDOWPATH': '2', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/home/fnorgh/.cargo/bin:/home/fnorgh/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/fnorgh/.local/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'i3', 'DESKTOP_STARTUP_ID': 'i3/kitty/1819-0-fnorgh_TIME22216', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'i3', 'XAUTHORITY': '/run/user/1000/gdm/Xauthority', 'SSH_AUTH_SOCK': '/run/user/1000/gnupg/S.gpg-agent.ssh', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/usr/bin/fish', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'i3', 'KITTY_WINDOW_ID': '1', 'GPG_AGENT_INFO': '/run/user/1000/gnupg/S.gpg-agent:0:1', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'QT_IM_MODULE': 'ibus', 'XDG_VTNR': '2', 'PWD': '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1', 'LC_ALL': 'en_US.UTF-8', 'XDG_DATA_DIRS': '/usr/share/i3:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'CLUTTER_IM_MODULE': 'ibus', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-i3:/etc/xdg', 'STARSHIP_SESSION_KEY': '1880722213213622', 'PYTHONPATH': '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'I3SOCK': '/run/user/1000/i3/ipc-socket.1819', 'COLCON': '1', 'GTK_THEME': 'catppuccin-mocha-green-standard+default:compact', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}, 'shell': False}
+[0.701317] (-) TimerEvent: {}
+[0.801539] (-) TimerEvent: {}
+[0.896830] (project_1) StdoutLine: {'line': b'running egg_info\n'}
+[0.897226] (project_1) StdoutLine: {'line': b'creating ../build/project_1/project_1.egg-info\n'}
+[0.901635] (-) TimerEvent: {}
+[0.914987] (project_1) StdoutLine: {'line': b'writing ../build/project_1/project_1.egg-info/PKG-INFO\n'}
+[0.915189] (project_1) StdoutLine: {'line': b'writing dependency_links to ../build/project_1/project_1.egg-info/dependency_links.txt\n'}
+[0.915371] (project_1) StdoutLine: {'line': b'writing requirements to ../build/project_1/project_1.egg-info/requires.txt\n'}
+[0.915571] (project_1) StdoutLine: {'line': b'writing top-level names to ../build/project_1/project_1.egg-info/top_level.txt\n'}
+[0.915684] (project_1) StdoutLine: {'line': b"writing manifest file '../build/project_1/project_1.egg-info/SOURCES.txt'\n"}
+[0.949908] (project_1) StdoutLine: {'line': b"reading manifest file '../build/project_1/project_1.egg-info/SOURCES.txt'\n"}
+[0.950360] (project_1) StdoutLine: {'line': b"writing manifest file '../build/project_1/project_1.egg-info/SOURCES.txt'\n"}
+[0.950658] (project_1) StdoutLine: {'line': b'running build\n'}
+[0.950881] (project_1) StdoutLine: {'line': b'running build_py\n'}
+[0.951011] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build\n'}
+[0.951132] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build/lib\n'}
+[0.951240] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build/lib/project_1\n'}
+[0.951398] (project_1) StdoutLine: {'line': b'copying project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build/lib/project_1\n'}
+[0.951481] (project_1) StdoutLine: {'line': b'running install\n'}
+[0.955992] (project_1) StdoutLine: {'line': b'running install_lib\n'}
+[0.972814] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/lib/python3.12/site-packages/project_1\n'}
+[0.973039] (project_1) StdoutLine: {'line': b'copying /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/build/lib/project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/lib/python3.12/site-packages/project_1\n'}
+[0.973341] (project_1) StdoutLine: {'line': b'byte-compiling /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/lib/python3.12/site-packages/project_1/__init__.py to __init__.cpython-312.pyc\n'}
+[0.973564] (project_1) StdoutLine: {'line': b'running install_data\n'}
+[0.973750] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/ament_index\n'}
+[0.973848] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/ament_index/resource_index\n'}
+[0.973929] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/ament_index/resource_index/packages\n'}
+[0.974038] (project_1) StdoutLine: {'line': b'copying resource/project_1 -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/ament_index/resource_index/packages\n'}
+[0.974120] (project_1) StdoutLine: {'line': b'copying package.xml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1\n'}
+[0.974234] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/launch\n'}
+[0.974310] (project_1) StdoutLine: {'line': b'copying launch/simulation.launch.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/launch\n'}
+[0.974422] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/worlds\n'}
+[0.974509] (project_1) StdoutLine: {'line': b'copying worlds/enviromental.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/worlds\n'}
+[0.974621] (project_1) StdoutLine: {'line': b'copying worlds/project_world.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/worlds\n'}
+[0.974716] (project_1) StdoutLine: {'line': b'creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/config\n'}
+[0.974787] (project_1) StdoutLine: {'line': b'copying config/tb4_bridge.yaml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/share/project_1/config\n'}
+[0.974879] (project_1) StdoutLine: {'line': b'running install_egg_info\n'}
+[0.992950] (project_1) StdoutLine: {'line': b'Copying ../build/project_1/project_1.egg-info to /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/install/project_1/lib/python3.12/site-packages/project_1-0.0.0-py3.12.egg-info\n'}
+[0.993655] (project_1) StdoutLine: {'line': b'running install_scripts\n'}
+[1.001726] (-) TimerEvent: {}
+[1.101938] (-) TimerEvent: {}
+[1.112170] (project_1) StdoutLine: {'line': b"writing list of installed files to '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/build/project_1/install.log'\n"}
+[1.131428] (project_1) CommandEnded: {'returncode': 0}
+[1.138410] (project_1) JobEnded: {'identifier': 'project_1', 'rc': 0}
+[1.139029] (-) EventReactorShutdown: {}

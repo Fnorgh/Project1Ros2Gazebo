@@ -1,0 +1,251 @@
+<sdf version='1.10'>
+  <world name='project_world'>
+
+    <!-- Physics: name required, step size per spec -->
+    <physics name="1ms" type="ode">
+      <max_step_size>0.003</max_step_size>
+      <real_time_update_rate>1000.0</real_time_update_rate>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <!-- Required Gazebo system plugins -->
+    <plugin filename="gz-sim-physics-system"
+        name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system"
+        name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+        name="gz::sim::systems::SceneBroadcaster"/>
+    <!-- Sensor plugins required for TurtleBot 4 LIDAR and IMU -->
+    <plugin filename="gz-sim-sensors-system"
+        name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+        name="gz::sim::systems::Imu"/>
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>5.5e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Ground plane -->
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!--
+      Environment layout (1ft = 0.3048m, origin at center of full environment):
+
+      Full bounding box: 20ft x 15ft (6.096m x 4.572m)
+
+        Room  (15ft x 10ft): x: -3.048 to +1.524,  y: -0.762 to +2.286
+        Hall longer branch (20ft x 5ft): x: -3.048 to +3.048,  y: -2.286 to -0.762
+        Hall shorter branch (5ft x 15ft): x: +1.524 to +3.048,  y: -2.286 to +2.286
+
+      Doorways (both 5ft = 1.524m wide):
+        Room doorway  — middle of room south wall,  x: -1.524 to  0.000, y: -0.762
+        Hall doorway  — ~5ft from west end of hall, x: -1.524 to  0.000, y: -2.286
+
+      Robot suggested spawn (room center): x=-0.762, y=0.762
+    -->
+
+    <!-- ===== OUTER PERIMETER WALLS ===== -->
+
+    <!-- North outer wall: 20ft wide, top of full environment -->
+    <model name='wall_outer_north'>
+      <static>true</static>
+      <pose>0 2.286 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>6.096 0.1 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>6.096 0.1 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- West outer wall: 15ft tall, left side of full environment -->
+    <model name='wall_outer_west'>
+      <static>true</static>
+      <pose>-3.048 0 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.1 4.572 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.1 4.572 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- East outer wall: 15ft tall, right side (end of shorter hall branch) -->
+    <model name='wall_outer_east'>
+      <static>true</static>
+      <pose>3.048 0 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.1 4.572 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.1 4.572 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- South outer wall, west segment: 5ft — left of hall doorway -->
+    <!-- Hall doorway gap: x=-1.524 to x=0, ~5ft from west end -->
+    <model name='wall_outer_south_west'>
+      <static>true</static>
+      <pose>-2.286 -2.286 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- South outer wall, east segment: 10ft — right of hall doorway -->
+    <model name='wall_outer_south_east'>
+      <static>true</static>
+      <pose>1.524 -2.286 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>3.048 0.1 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>3.048 0.1 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ===== INTERIOR ROOM WALLS ===== -->
+
+    <!-- Room south wall, west segment: 5ft — left of room doorway -->
+    <!-- Room doorway gap: x=-1.524 to x=0, middle of the 15ft south wall -->
+    <model name='wall_room_south_west'>
+      <static>true</static>
+      <pose>-2.286 -0.762 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Room south wall, east segment: 5ft — right of room doorway -->
+    <model name='wall_room_south_east'>
+      <static>true</static>
+      <pose>0.762 -0.762 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>1.524 0.1 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Room east wall: 10ft tall, separates room from shorter hall branch -->
+    <model name='wall_room_east'>
+      <static>true</static>
+      <pose>1.524 0.762 0.25 0 0 0</pose>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry><box><size>0.1 3.048 0.5</size></box></geometry>
+        </collision>
+        <visual name='visual'>
+          <geometry><box><size>0.1 3.048 0.5</size></box></geometry>
+          <material>
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Sun -->
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.1 -0.9</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.9</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+  </world>
+</sdf>
