@@ -1,0 +1,39 @@
+[0.853s] Invoking command in '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/project_1 build --build-base /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build install --record /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/install.log --single-version-externally-managed install_data
+[1.085s] running egg_info
+[1.085s] creating build/project_1/project_1.egg-info
+[1.103s] writing build/project_1/project_1.egg-info/PKG-INFO
+[1.103s] writing dependency_links to build/project_1/project_1.egg-info/dependency_links.txt
+[1.103s] writing requirements to build/project_1/project_1.egg-info/requires.txt
+[1.103s] writing top-level names to build/project_1/project_1.egg-info/top_level.txt
+[1.103s] writing manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+[1.141s] reading manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+[1.141s] writing manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+[1.142s] running build
+[1.142s] running build_py
+[1.142s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build
+[1.142s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib
+[1.142s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1
+[1.142s] copying project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1
+[1.142s] running install
+[1.147s] running install_lib
+[1.166s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1
+[1.167s] copying /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1
+[1.167s] byte-compiling /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1/__init__.py to __init__.cpython-312.pyc
+[1.167s] running install_data
+[1.167s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index
+[1.167s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index
+[1.167s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index/packages
+[1.168s] copying resource/project_1 -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index/packages
+[1.168s] copying package.xml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1
+[1.168s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/launch
+[1.168s] copying launch/simulation.launch.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/launch
+[1.168s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+[1.168s] copying worlds/enviromental.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+[1.168s] copying worlds/project_world.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+[1.168s] creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/config
+[1.168s] copying config/tb4_bridge.yaml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/config
+[1.168s] running install_egg_info
+[1.188s] Copying build/project_1/project_1.egg-info to /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1-0.0.0-py3.12.egg-info
+[1.188s] running install_scripts
+[1.312s] writing list of installed files to '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/install.log'
+[1.338s] Invoked command in '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/project_1 build --build-base /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build install --record /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/install.log --single-version-externally-managed install_data

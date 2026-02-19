@@ -1,0 +1,37 @@
+running egg_info
+creating build/project_1/project_1.egg-info
+writing build/project_1/project_1.egg-info/PKG-INFO
+writing dependency_links to build/project_1/project_1.egg-info/dependency_links.txt
+writing requirements to build/project_1/project_1.egg-info/requires.txt
+writing top-level names to build/project_1/project_1.egg-info/top_level.txt
+writing manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+reading manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+writing manifest file 'build/project_1/project_1.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1
+copying project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1
+running install
+running install_lib
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1
+copying /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/build/lib/project_1/__init__.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1
+byte-compiling /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1/__init__.py to __init__.cpython-312.pyc
+running install_data
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index/packages
+copying resource/project_1 -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/ament_index/resource_index/packages
+copying package.xml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/launch
+copying launch/simulation.launch.py -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/launch
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+copying worlds/enviromental.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+copying worlds/project_world.sdf -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/worlds
+creating /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/config
+copying config/tb4_bridge.yaml -> /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/share/project_1/config
+running install_egg_info
+Copying build/project_1/project_1.egg-info to /home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/install/project_1/lib/python3.12/site-packages/project_1-0.0.0-py3.12.egg-info
+running install_scripts
+writing list of installed files to '/home/fnorgh/skeewl/project1Robot/Project1Ros2Gazebo/project_1/build/project_1/install.log'
