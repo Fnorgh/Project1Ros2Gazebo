@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
 <sdf version="1.7">
   <world name="project_world">
-    <physics type="ode">
-      <max_step_size>0.001</max_step_size>
-      <real_time_factor>1</real_time_factor>
-    </physics>
+    <!-- Given Physics -->
+    <physics name="1ms" type="ode">
+    <max step size>0.003</max step size>
+    <real time update rate>1000.0</real time update rate>
+    <real time factor>1.0</real time factor> </physics>
 
     <!-- Ground Plane -->
     <model name="ground_plane">
