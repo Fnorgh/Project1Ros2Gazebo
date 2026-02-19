@@ -12,13 +12,30 @@ export GZ_SIM_RESOURCE_PATH="$PWD/project_1/models:${GZ_SIM_RESOURCE_PATH}"
 
 ## New stuff
 
-```bash
+```bass
 pkill -f "gz sim"; or true
-                           pkill -f "gzserver"; or true
-                           pkill -f "gzclient"; or true
-                           pkill -f "ign gazebo"; or true
-                           pkill -f "ignition"; or true
-                           pkill -f "ros_gz"; or true
+pkill -f "gzserver"; or true
+pkill -f "gzclient"; or true
+pkill -f "ign gazebo"; or true
+pkill -f "ignition"; or true
+pkill -f "ros_gz"; or true
+```
+Bash (best)
+```bash
+pkill -f "gz sim"      || true
+pkill -f "gzserver"    || true
+pkill -f "gzclient"    || true
+pkill -f "ign gazebo"  || true
+pkill -f "ignition"    || true
+pkill -f "ros_gz"      || true
+```
+
+## New launch file
+Run from repo root:
+```bash
+colcon build
+source install/setup.bash
+ros2 launch project_1 simulation.launch.py
 ```
 
 for my code i use to run:
