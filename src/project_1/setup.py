@@ -25,7 +25,9 @@ setup(
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [],
+        'console_scripts': [
+            'behavior_mux = project_1.behavior_mux:main',
+        ],
     },
 )
 
