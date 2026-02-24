@@ -2,7 +2,7 @@
 import rclpy
 from rclpy.node import Node
 
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, TwistStamped
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 
@@ -15,12 +15,14 @@ class ReactiveController(Node):
         self.declare_parameter('scan_topic', '/scan')
         self.declare_parameter('odom_topic', '/odom')
         self.declare_parameter('cmd_vel_key_topic', '/cmd_vel_key')
-        self.declare_parameter('cmd_vel_topic', '/cmd_vel')
+
+        # IMPORTANT: real sim drive topic + stamped message type
+        self.declare_parameter('cmd_vel_topic', '/diffdrive_controller/cmd_vel')
 
         # Behavior params
-        self.declare_parameter('safety_m', 0.26)          # collision threshold (0.22–0.30m recommended)
+        self.declare_parameter('safety_m', 0.26)          # collision threshold
         self.declare_parameter('forward_speed', 0.15)
-        self.declare_parameter('key_timeout_sec', 0.25)   # how long keyboard command stays “active”
+        self.declare_parameter('key_timeout_sec', 0.25)   # how long keyboard cmd stays active
         self.declare_parameter('publish_hz', 20.0)
 
         self.scan_topic = self.get_parameter('scan_topic').value
@@ -40,20 +42,27 @@ class ReactiveController(Node):
 
         # Subs
         self.create_subscription(LaserScan, self.scan_topic, self.on_scan, 10)
-        self.create_subscription(Odometry, self.odom_topic, self.on_odom, 10)  # (unused in Phase 2 but required)
+        self.create_subscription(Odometry, self.odom_topic, self.on_odom, 10)  # required by spec
         self.create_subscription(Twist, self.cmd_vel_key_topic, self.on_key_cmd, 10)
 
-        # Pub
-        self.pub = self.create_publisher(Twist, self.cmd_vel_topic, 10)
+        # Pub (TwistStamped!)
+        self.pub = self.create_publisher(TwistStamped, self.cmd_vel_topic, 10)
 
         self.create_timer(1.0 / publish_hz, self.tick)
 
         self.get_logger().info(
-            f"reactive_controller up. Sub: {self.scan_topic}, {self.odom_topic}, {self.cmd_vel_key_topic}. Pub: {self.cmd_vel_topic}"
+            f"reactive_controller up. Sub: {self.scan_topic}, {self.odom_topic}, {self.cmd_vel_key_topic}. "
+            f"Pub: {self.cmd_vel_topic} (TwistStamped, zero-stamp)"
         )
 
     def now_ns(self) -> int:
         return self.get_clock().now().nanoseconds
+
+    def publish_twist(self, t: Twist):
+        # KEY FIX: leave header.stamp ZERO so diffdrive_controller stamps it internally
+        msg = TwistStamped()
+        msg.twist = t
+        self.pub.publish(msg)
 
     def on_scan(self, msg: LaserScan):
         # robust min range ignoring invalid values
@@ -66,7 +75,7 @@ class ReactiveController(Node):
         self.min_range = m
 
     def on_odom(self, msg: Odometry):
-        # Phase 2 doesn't need it, but we subscribe as required.
+        # Not used for reactive behavior here, but subscribed as required.
         pass
 
     def on_key_cmd(self, msg: Twist):
@@ -79,10 +88,9 @@ class ReactiveController(Node):
     def tick(self):
         out = Twist()
 
-        # Priority 1: HALT (collision approximated by scan threshold)
+        # Priority 1: HALT
         if self.min_range < self.safety_m:
-            # publish all zeros
-            self.pub.publish(out)
+            self.publish_twist(out)  # zeros
             return
 
         # Priority 2: Keyboard command
@@ -90,12 +98,12 @@ class ReactiveController(Node):
             abs(self.last_key_cmd.linear.x) > 1e-3
             or abs(self.last_key_cmd.angular.z) > 1e-3
         ):
-            self.pub.publish(self.last_key_cmd)
+            self.publish_twist(self.last_key_cmd)
             return
 
         # Priority 6: Drive forward
         out.linear.x = self.forward_speed
-        self.pub.publish(out)
+        self.publish_twist(out)
 
 
 def main():
@@ -107,7 +115,7 @@ def main():
         pass
     finally:
         try:
-            node.pub.publish(Twist())
+            node.publish_twist(Twist())  # stop
         except Exception:
             pass
         node.destroy_node()
