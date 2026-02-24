@@ -44,6 +44,21 @@ for my code i use to run:
  bash -c "source /opt/ros/jazzy/setup.bash && source install/setup.bash && ros2 launch project_1 simulation.launch.py"
 ```
 
+term 1
+```bash
+./run_sim.sh
+```
+term 2
+```bash
+source ~/robotics/Project1Ros2Gazebo/env.sh
+ros2 run project_1 reactive_controller
+```
+term 3
+```bash
+source ~/robotics/Project1Ros2Gazebo/env.sh
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=/cmd_vel_key
+```
+
 rebase and shit
 
 ```bash
