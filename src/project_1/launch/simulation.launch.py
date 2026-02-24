@@ -87,6 +87,18 @@ def generate_launch_description():
         ]
     )
 
+    bumper_stop = Node(
+    package='project_1',
+    executable='bumper_stop',
+    name='bumper_stop',
+    parameters=[
+        {'contacts_topic': '/bumper_contact'},
+        {'cmd_vel_topic': '/diffdrive_controller/cmd_vel'},
+        {'publish_hz': 50.0},
+        {'stop_hold_sec': 1.5},
+    ],
+    output='screen',
+)
     return LaunchDescription([
         declare_x_pose,
         declare_y_pose,
@@ -97,4 +109,5 @@ def generate_launch_description():
         gazebo,
         clock_bridge,
         spawn_tb4,
+        bumper_stop,
     ])

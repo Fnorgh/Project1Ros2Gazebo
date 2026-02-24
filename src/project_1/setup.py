@@ -27,6 +27,9 @@ setup(
     entry_points={
         'console_scripts': [
             'behavior_mux = project_1.behavior_mux:main',
+            'bumper_stop  = project_1.behavior_bumper_stop:main',
+            'reactive_controller = project_1.reactive_controller:main',
+            'cmd_vel_key_adapter = project_1.cmd_vel_key_adapter:main',
         ],
     },
 )
