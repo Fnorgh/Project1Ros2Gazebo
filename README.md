@@ -30,22 +30,10 @@ pkill -f "ignition"    || true
 pkill -f "ros_gz"      || true
 ```
 
-## New launch file
-Run from repo root:
-```bash
-colcon build
-source install/setup.bash
-ros2 launch project_1 simulation.launch.py
-```
-
-for my code i use to run:
-
-```bash
- bash -c "source /opt/ros/jazzy/setup.bash && source install/setup.bash && ros2 launch project_1 simulation.launch.py"
-```
 
 term 1
 ```bash
+source ./env.sh
 ./run_sim.sh
 ```
 term 2
@@ -56,7 +44,7 @@ ros2 run project_1 reactive_controller
 term 3
 ```bash
 source ./env.sh
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=/cmd_vel_key
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel_key
 ```
 
 rebase and shit
