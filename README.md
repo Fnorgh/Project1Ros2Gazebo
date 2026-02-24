@@ -50,19 +50,18 @@ term 1
 ```
 term 2
 ```bash
-source ~/robotics/Project1Ros2Gazebo/env.sh
+source ./env.sh
 ros2 run project_1 reactive_controller
 ```
 term 3
 ```bash
-source ~/robotics/Project1Ros2Gazebo/env.sh
+source ./env.sh
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r cmd_vel:=/cmd_vel_key
 ```
 
 rebase and shit
 
 ```bash
-cd ~/robotics/Project1Ros2Gazebo
 colcon build --packages-select project_1
-source ~/robotics/Project1Ros2Gazebo/install/setup.bash
+source ./install/setup.bash
 ```
