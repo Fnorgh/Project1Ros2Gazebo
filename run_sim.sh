@@ -1,61 +1,70 @@
 #!/usr/bin/env bash
-# run_sim.sh - Build and launch TurtleBot4 simulation
+# run_sim.sh - Build and launch Gazebo + TurtleBot4 spawn (reliable order)
 
-set -eo pipefail  # (no -u here; we enable after sourcing)
-
+set -eo pipefail
 WORKSPACE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ── 0. Source ROS env for bash (avoid nounset issues) ────────────────────────
+# ── Source ROS + workspace ──────────────────────────────────────────────────
 set +u
-if [[ -f /opt/ros/jazzy/setup.bash ]]; then
-  # shellcheck disable=SC1091
-  source /opt/ros/jazzy/setup.bash
-fi
-
+source /opt/ros/jazzy/setup.bash
 if [[ -f "$WORKSPACE/install/setup.bash" ]]; then
-  # shellcheck disable=SC1091
   source "$WORKSPACE/install/setup.bash"
 fi
 set -u
 
-# ── 0b. ROS networking / DDS defaults (shared lab machines) ──────────────────
-# Don't restrict discovery to localhost; it breaks multi-terminal discovery patterns.
+# ── DDS / lab machine stability ─────────────────────────────────────────────
 unset ROS_LOCALHOST_ONLY || true
 export ROS_DOMAIN_ID=0
-
-# FastDDS shared-memory transport often fails on shared machines; disable it.
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 export FASTDDS_SHM_TRANSPORT=0
+export QT_QPA_PLATFORM=xcb
+export GZ_SIM_RENDER_ENGINE=ogre
+export GZ_RENDERING_ENGINE=ogre
 
-# ── 1. Build ────────────────────────────────────────────────────────────────
+# ── Build ───────────────────────────────────────────────────────────────────
 echo "[run_sim] Building project_1..."
 cd "$WORKSPACE"
 colcon build --packages-select project_1
 echo "[run_sim] Build complete."
 
-# ── 2. Args ────────────────────────────────────────────────────────────────
-X_POSE="${1:-0.0}"
-Y_POSE="${2:-0.0}"
-YAW="${3:-0.0}"
+WORLD_FILE="$WORKSPACE/install/project_1/share/project_1/worlds/enviromental.sdf"
+WORLD_NAME="project_world"   # <-- from <world name='project_world'>
 
-# ── 3. Launch simulation ────────────────────────────────────────────────────
-echo "[run_sim] Launching simulation..."
+echo "[run_sim] Launching Gazebo world: $WORLD_FILE"
 
-gnome-terminal --title="Simulation" -- bash -lc "
+gnome-terminal --title="Gazebo" -- bash -lc "
 set -eo pipefail
-set +u
 source /opt/ros/jazzy/setup.bash
 source \"$WORKSPACE/install/setup.bash\"
-set -u
 
-# Same env in the launched terminal
+unset ROS_LOCALHOST_ONLY || true
+export ROS_DOMAIN_ID=0
+export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+export FASTDDS_SHM_TRANSPORT=0
+export QT_QPA_PLATFORM=xcb
+export GZ_SIM_RENDER_ENGINE=ogre
+export GZ_RENDERING_ENGINE=ogre
+
+ros2 launch ros_gz_sim gz_sim.launch.py gz_args:=\"-r -v 4 $WORLD_FILE\"
+exec bash
+"
+
+echo "[run_sim] Waiting for Gazebo to come up..."
+sleep 4
+
+echo "[run_sim] Spawning TurtleBot4 into world: $WORLD_NAME"
+gnome-terminal --title="TB4 Spawn" -- bash -lc "
+set -eo pipefail
+source /opt/ros/jazzy/setup.bash
+source \"$WORKSPACE/install/setup.bash\"
+
 unset ROS_LOCALHOST_ONLY || true
 export ROS_DOMAIN_ID=0
 export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 export FASTDDS_SHM_TRANSPORT=0
 
-ros2 launch project_1 simulation.launch.py x_pose:=$X_POSE y_pose:=$Y_POSE yaw:=$YAW
+ros2 launch turtlebot4_gz_bringup turtlebot4_spawn.launch.py gazebo:=ignition world:=$WORLD_NAME
 exec bash
 "
 
-echo "[run_sim] Done. Gazebo launching in a new terminal."
+echo "[run_sim] Done."
