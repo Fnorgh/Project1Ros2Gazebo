@@ -51,5 +51,4 @@ rebase and shit
 
 ```bash
 colcon build --packages-select project_1
-source ./install/setup.bash
 ```
