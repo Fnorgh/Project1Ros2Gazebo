@@ -43,3 +43,9 @@ for my code i use to run:
 ```bash
  bash -c "source /opt/ros/jazzy/setup.bash && source install/setup.bash && ros2 launch project_1 simulation.launch.py"
 ```
+
+rebase and shit
+
+cd ~/robotics/Project1Ros2Gazebo
+colcon build --packages-select project_1
+source ~/robotics/Project1Ros2Gazebo/install/setup.bash
