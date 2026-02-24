@@ -46,6 +46,8 @@ for my code i use to run:
 
 rebase and shit
 
+```bash
 cd ~/robotics/Project1Ros2Gazebo
 colcon build --packages-select project_1
 source ~/robotics/Project1Ros2Gazebo/install/setup.bash
+```
