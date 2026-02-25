@@ -102,9 +102,15 @@ class ReactiveController(Node):
         if not self.clock_valid():
             return
 
-        # Priority 0: bumper stop
+        # Priority 0: bumper stop — block forward motion, allow reverse/turn
         if self.stop_active:
-            self.publish_twist(Twist())
+            cmd = Twist()
+            if self.key_active() and (
+                self.last_key_cmd.linear.x < -1e-3        # backing away
+                or abs(self.last_key_cmd.angular.z) > 1e-3  # turning
+            ):
+                cmd = self.last_key_cmd
+            self.publish_twist(cmd)
             return
 
         # Priority 1: laser safety halt
