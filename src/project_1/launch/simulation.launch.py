@@ -133,8 +133,8 @@ def generate_launch_description():
                     {'cmd_vel_topic':     '/diffdrive_controller/cmd_vel'},
                     {'safety_m':          0.26},
                     {'forward_speed':     0.15},
-                    {'key_timeout_sec':   0.25},
-                    {'publish_hz':        20.0},
+                    {'key_timeout_sec':   0.5},
+                    {'publish_hz':        50.0},
                 ],
                 output='screen',
             )

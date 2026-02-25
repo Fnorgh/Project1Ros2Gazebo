@@ -20,8 +20,8 @@ class ReactiveController(Node):
         self.declare_parameter('cmd_vel_topic',     '/diffdrive_controller/cmd_vel')
         self.declare_parameter('safety_m',          0.26)
         self.declare_parameter('forward_speed',     0.15)
-        self.declare_parameter('key_timeout_sec',   0.25)
-        self.declare_parameter('publish_hz',        20.0)
+        self.declare_parameter('key_timeout_sec',   0.5)
+        self.declare_parameter('publish_hz',        50.0)
 
         self.scan_topic        = self.get_parameter('scan_topic').value
         self.odom_topic        = self.get_parameter('odom_topic').value
@@ -113,10 +113,9 @@ class ReactiveController(Node):
             return
 
         # Priority 2: keyboard override
-        if self.key_active() and (
-            abs(self.last_key_cmd.linear.x)   > 1e-3
-            or abs(self.last_key_cmd.angular.z) > 1e-3
-        ):
+        # Honor any recent key command, including explicit zero (stop).
+        # After key_timeout_sec of silence, autonomous driving resumes.
+        if self.key_active():
             self.publish_twist(self.last_key_cmd)
             return
 
