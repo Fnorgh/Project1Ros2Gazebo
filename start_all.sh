@@ -19,15 +19,6 @@ echo "[start_all] Build complete."
 # ── Start simulation ────────────────────────────────────────────────────────
 "$WORKSPACE/run_sim.sh" "$@"
 
-# ── Reactive controller ─────────────────────────────────────────────────────
-gnome-terminal --title="Reactive Controller" -- bash -lc "
-source \"$WORKSPACE/env.sh\"
-echo '[Reactive] Starting...'
-ros2 run project_1 reactive_controller \
-  --ros-args -p use_sim_time:=true
-exec bash
-"
-
 # ── Teleop keyboard ─────────────────────────────────────────────────────────
 gnome-terminal --title="Teleop" -- bash -lc "
 source \"$WORKSPACE/env.sh\"

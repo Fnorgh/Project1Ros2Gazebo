@@ -117,6 +117,30 @@ def generate_launch_description():
         ]
     )
 
+    # ── reactive_controller ──────────────────────────────────────────────────
+    reactive_controller = TimerAction(
+        period=15.0,   # same window as bumper_stop — controllers must be active
+        actions=[
+            Node(
+                package='project_1',
+                executable='reactive_controller',
+                name='reactive_controller',
+                parameters=[
+                    {'scan_topic':        '/scan'},
+                    {'odom_topic':        '/odom'},
+                    {'cmd_vel_key_topic': '/cmd_vel_key'},
+                    {'stop_topic':        '/stop_request'},
+                    {'cmd_vel_topic':     '/diffdrive_controller/cmd_vel'},
+                    {'safety_m':          0.26},
+                    {'forward_speed':     0.15},
+                    {'key_timeout_sec':   0.25},
+                    {'publish_hz':        20.0},
+                ],
+                output='screen',
+            )
+        ]
+    )
+
     return LaunchDescription([
         set_sim_time,        # MUST be first
         declare_x_pose,
@@ -130,4 +154,5 @@ def generate_launch_description():
         clock_bridge,
         spawn_tb4,
         bumper_stop,
+        reactive_controller,
     ])
