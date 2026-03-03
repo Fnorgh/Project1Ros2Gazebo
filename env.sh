@@ -8,4 +8,4 @@ export FASTDDS_SHM_TRANSPORT=0
 
 # Source ROS + your workspace
 source /opt/ros/jazzy/setup.bash
-source "$HOME/robotics/Project1Ros2Gazebo/install/setup.bash"
+source "./install/setup.bash"
