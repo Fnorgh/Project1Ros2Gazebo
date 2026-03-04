@@ -3,6 +3,7 @@
 ## Run project
 
 ```bass
+pkill -f "reactive_controller"; or true
 pkill -f "gz sim"; or true
 pkill -f "gzserver"; or true
 pkill -f "gzclient"; or true
@@ -11,12 +12,13 @@ pkill -f "ignition"; or true
 pkill -f "ros_gz"; or true
 ```
 ```bash
-pkill -f "gz sim"      || true
-pkill -f "gzserver"    || true
-pkill -f "gzclient"    || true
-pkill -f "ign gazebo"  || true
-pkill -f "ignition"    || true
-pkill -f "ros_gz"      || true
+pkill -f "reactive_controller" || true
+pkill -f "gz sim"              || true
+pkill -f "gzserver"            || true
+pkill -f "gzclient"            || true
+pkill -f "ign gazebo"          || true
+pkill -f "ignition"            || true
+pkill -f "ros_gz"              || true
 ```
 
 
