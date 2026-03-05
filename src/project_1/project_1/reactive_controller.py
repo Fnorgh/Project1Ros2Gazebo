@@ -2,7 +2,7 @@
 import rclpy
 from rclpy.node import Node
 
-from geometry_msgs.msg import Twist, TwistStamped
+from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 
@@ -17,7 +17,7 @@ class ReactiveController(Node):
         self.declare_parameter('cmd_vel_key_topic', '/cmd_vel_key')
 
         # IMPORTANT: real sim drive topic + stamped message type
-        self.declare_parameter('cmd_vel_topic', '/diffdrive_controller/cmd_vel')
+        self.declare_parameter('cmd_vel_topic', '/cmd_vel_unstamped')
 
         # Behavior params
         self.declare_parameter('safety_m', 0.26)          # collision threshold
@@ -46,23 +46,20 @@ class ReactiveController(Node):
         self.create_subscription(Twist, self.cmd_vel_key_topic, self.on_key_cmd, 10)
 
         # Pub (TwistStamped!)
-        self.pub = self.create_publisher(TwistStamped, self.cmd_vel_topic, 10)
+        self.pub = self.create_publisher(Twist, self.cmd_vel_topic, 10)
 
         self.create_timer(1.0 / publish_hz, self.tick)
 
         self.get_logger().info(
             f"reactive_controller up. Sub: {self.scan_topic}, {self.odom_topic}, {self.cmd_vel_key_topic}. "
-            f"Pub: {self.cmd_vel_topic} (TwistStamped, zero-stamp)"
+            f"Pub: {self.cmd_vel_topic} (Twist)"
         )
 
     def now_ns(self) -> int:
         return self.get_clock().now().nanoseconds
 
     def publish_twist(self, t: Twist):
-        # KEY FIX: leave header.stamp ZERO so diffdrive_controller stamps it internally
-        msg = TwistStamped()
-        msg.twist = t
-        self.pub.publish(msg)
+        self.pub.publish(t)
 
     def on_scan(self, msg: LaserScan):
         # robust min range ignoring invalid values
