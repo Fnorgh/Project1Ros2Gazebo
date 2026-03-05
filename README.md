@@ -35,7 +35,7 @@ ros2 run project_1 reactive_controller
 Terminal 3
 ```bash
 source ./env.sh
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel_key
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true -r /cmd_vel:=/cmd_vel
 ```
 Rebase
 ```bash
@@ -52,8 +52,6 @@ export GZ_SIM_RESOURCE_PATH="$PWD/project_1/models:${GZ_SIM_RESOURCE_PATH}"
 
 # Plan
 ## Jace
-* #2: Accept keyboard movement commands from a human user.
-  * Fix teleop in terminal 3.
 * #6: Drive forward.
 * Map the world (not related to any behavior. Just create map)
 
