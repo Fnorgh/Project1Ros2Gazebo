@@ -37,10 +37,6 @@ Terminal 3
 source ./env.sh
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -p stamped:=true -r /cmd_vel:=/cmd_vel
 ```
-Rebase
-```bash
-colcon build --packages-select project_1
-```
 
 ## Run world only
 To run `gz sim Project1Ros2Gazebo/project_1/worlds/project_world.sdf`, please do the following while in `Project1Ros2Gazebo`:
@@ -49,19 +45,3 @@ To run `gz sim Project1Ros2Gazebo/project_1/worlds/project_world.sdf`, please do
 export GAZEBO_MODEL_PATH="$PWD/project_1/models:${GAZEBO_MODEL_PATH}"
 export GZ_SIM_RESOURCE_PATH="$PWD/project_1/models:${GZ_SIM_RESOURCE_PATH}"
 ```
-
-# Plan
-## Jace
-* #6: Drive forward.
-* Map the world (not related to any behavior. Just create map)
-
-## Noah
-* #3: Escape from (roughly) symmetric obstacles within 1ft in front of the robot.
-* #4: Avoid asymmetric obstacles within 1ft in front of the robot.
-* #5: Turn randomly (uniformly sampled within ±15°) after every 1ft of forward movement.
-
-## Both
-* World/setup documentation
-* Code documentation
-  * Each write the documenation for their own or familiar code
-
