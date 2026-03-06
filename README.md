@@ -19,6 +19,8 @@ pkill -f "gzclient"            || true
 pkill -f "ign gazebo"          || true
 pkill -f "ignition"            || true
 pkill -f "ros_gz"              || true
+pkill -f "ruby" || true
+pkill -f "gz" || true
 ```
 
 
