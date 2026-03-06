@@ -30,7 +30,7 @@ source ./env.sh
 Terminal 2
 ```bash
 source ./env.sh
-ros2 run project_1 reactive_controller
+ros2 run project_1 reactive_controller --ros-args -p cmd_vel_topic:=/cmd_vel
 ```
 Terminal 3
 ```bash
