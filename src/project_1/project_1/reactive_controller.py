@@ -1,17 +1,11 @@
 """
-Reactive controller for TurtleBot 4 (Project 1).
-
-Behavior priority (highest -> lowest):
-  1. HALT     - bumper / near-collision (laser threshold)
-  2. KEYBOARD - human teleop via /cmd_vel_key
-  3. ESCAPE   - symmetric obstacle within 1 ft -> turn ~180 deg (fixed-action pattern)
-  4. AVOID    - asymmetric obstacle within 1 ft -> reflexive turn away
-  5. WANDER   - random turn (+-15 deg) after every 1 ft of forward travel
-  6. DRIVE    - drive forward
-
-Laser geometry fields (angle_min, angle_max, angle_increment) are always used
-to interpret beam angles -- no fixed beam-index assumptions are made, as required
-by the project guide.
+Behavior priority (from highest to lowest):
+  1. Halt     - bumper / near-collision (laser threshold)
+  2. Keyboard - human teleop via /cmd_vel_key
+  3. Escape   - symmetric obstacle within 1 ft -> turn ~180 deg (fixed-action pattern)
+  4. Avoid    - asymmetric obstacle within 1 ft -> reflexive turn away
+  5. Wander   - random turn (+-15 deg) after every 1 ft of forward travel
+  6. Drive    - drive forward
 
 Yaw is derived from /odom quaternion via yaw_from_quat(), as given in the guide.
 """
@@ -28,9 +22,7 @@ from nav_msgs.msg import Odometry
 from sensor_msgs.msg import LaserScan
 
 
-# ---------------------------------------------------------------------------
-# Helper provided by project guide
-# ---------------------------------------------------------------------------
+# Helper provided by project guide!!
 
 def yaw_from_quat(x: float, y: float, z: float, w: float) -> float:
     """Convert quaternion to yaw angle in radians."""
@@ -39,9 +31,7 @@ def yaw_from_quat(x: float, y: float, z: float, w: float) -> float:
     return math.atan2(siny_cosp, cosy_cosp)
 
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
+# CONSTANTS!!
 
 ONE_FOOT_M = 0.3048
 OBSTACLE_DIST_M = ONE_FOOT_M
@@ -56,17 +46,15 @@ FRONT_CENTER_HALF_ANGLE = math.radians(20.0)
 FRONT_SIDE_HALF_ANGLE = math.radians(60.0)
 
 
-# ---------------------------------------------------------------------------
-# Controller
-# ---------------------------------------------------------------------------
+# Controllers!!
 
 class ReactiveController(Node):
     """
-    Subsumption-style reactive controller.
+    Brooks subsumption-style controller
 
     Each behavior is a method returning a Twist or None.
-    tick() walks the priority list and publishes the first non-None result,
-    suppressing all lower-priority behaviors.
+    tick() goes through the priority list and publishes the first non-None
+    result, which suppresses all priority behaviors below it.
     """
 
     def __init__(self):
@@ -103,16 +91,16 @@ class ReactiveController(Node):
         self.pos_x = 0.0
         self.pos_y = 0.0
 
-        # Keyboard state
+        # Keyboard
         self.last_key_cmd = Twist()
         self.last_key_time_ns = 0
 
-        # Behavior 3 - ESCAPE state
+        # Behavior 3 - Escape
         self.escaping = False
         self.escape_start_yaw = 0.0
         self.escape_target_delta = 0.0
 
-        # Behavior 5 - WANDER state
+        # Behavior 5 - Wander
         self.wander_dist_accum = 0.0
         self.wander_prev_x = None
         self.wander_prev_y = None
@@ -133,20 +121,17 @@ class ReactiveController(Node):
             f'key={cmd_vel_key_topic} -> {cmd_vel_topic}'
         )
 
-    # -----------------------------------------------------------------------
-    # Utility
-    # -----------------------------------------------------------------------
+    # Utility!!
 
     def now_ns(self) -> int:
         return self.get_clock().now().nanoseconds
 
     def publish_twist(self, t: Twist) -> None:
         """
-        Publish a zero-stamp TwistStamped.
+        Tell the robot how to move.
 
-        The diff_drive_controller in ROS 2 control accepts TwistStamped on
-        ~/cmd_vel and uses linear.x and angular.z as the body velocity command.
-        :contentReference[oaicite:0]{index=0}
+        We put the move instructions into a message
+        and send it to the robot so it knows what to do.
         """
         msg = TwistStamped()
         msg.twist = t
@@ -161,7 +146,7 @@ class ReactiveController(Node):
 
     @staticmethod
     def _angle_diff(a: float, b: float) -> float:
-        """Shortest signed angular difference a - b, in (-pi, pi]."""
+        # a - b, in (-pi, pi]
         return math.atan2(math.sin(a - b), math.cos(a - b))
 
     @staticmethod
@@ -175,9 +160,7 @@ class ReactiveController(Node):
             self._sector_min(right),
         ) <= OBSTACLE_DIST_M
 
-    # -----------------------------------------------------------------------
-    # Callbacks
-    # -----------------------------------------------------------------------
+    # Callbacks!!
 
     def on_scan(self, msg: LaserScan) -> None:
         self.scan = msg
@@ -218,20 +201,16 @@ class ReactiveController(Node):
         self.last_key_cmd = msg
         self.last_key_time_ns = self.now_ns()
 
-    # -----------------------------------------------------------------------
-    # Scan analysis
-    # -----------------------------------------------------------------------
+    # Scan analysis!!
 
     def _front_sectors(self):
         """
         Return (left, center, right) valid ranges from the forward field of view.
 
+        _Ranges_
         left   :  +20 deg to +60 deg
         center :  -20 deg to +20 deg
         right  :  -60 deg to -20 deg
-
-        LaserScan angles are interpreted using angle_min and angle_increment,
-        with 0 radians forward along the x-axis. :contentReference[oaicite:1]{index=1}
         """
         if self.scan is None:
             return [], [], []
@@ -254,13 +233,11 @@ class ReactiveController(Node):
 
         return left, center, right
 
-    # -----------------------------------------------------------------------
-    # Behaviors
-    # -----------------------------------------------------------------------
+    # Behaviors!!
 
     def _behavior_halt(self) -> Twist | None:
         """
-        Priority 1 – HALT
+        Priority 1: Halt
         Stop if the nearest valid scan range breaches the safety threshold.
         """
         if self.min_range < self.safety_m:
@@ -269,8 +246,8 @@ class ReactiveController(Node):
 
     def _behavior_keyboard(self) -> Twist | None:
         """
-        Priority 2 – KEYBOARD
-        Forward the most recent keyboard command if it is fresh and non-zero.
+        Priority 2: Keyboard
+        Forward the most recent keyboard commands
         """
         if (self.now_ns() - self.last_key_time_ns) > self.key_timeout_ns:
             return None
@@ -282,11 +259,10 @@ class ReactiveController(Node):
 
     def _behavior_escape(self) -> Twist | None:
         """
-        Priority 3 – ESCAPE (fixed-action pattern)
+        Priority 3: Escape
 
-        Trigger: obstacle within 1 ft in front-center and left/right are
-        roughly symmetric.
-        Action : committed ~180 deg turn (±30 deg), continuing until completed.
+        Do a 180 degree turn when obstacle within 1 ft in front-center and left/
+        right are roughly symmetric.
         """
         if self.escaping:
             rotated = abs(self._angle_diff(self.current_yaw, self.escape_start_yaw))
@@ -331,10 +307,9 @@ class ReactiveController(Node):
 
     def _behavior_avoid(self) -> Twist | None:
         """
-        Priority 4 – AVOID (reflex)
+        Priority 4: Avoid
 
-        Trigger: obstacle within 1 ft ahead, but not symmetric enough for ESCAPE.
-        Action : turn away from the closer side while obstacle persists.
+        Turn away from closer side when symmetric obstacle >= 1 ft ahead
         """
         left, center, right = self._front_sectors()
 
@@ -372,11 +347,11 @@ class ReactiveController(Node):
 
     def _behavior_wander(self) -> Twist | None:
         """
-        Priority 5 – WANDER
+        Priority 5: Wander
 
-        After every 1 ft of cumulative forward travel, pick a uniformly random
-        angle in ±15 deg and rotate by that amount before resuming forward
-        driving. Distance accumulation resets after each turn.
+        After every 1 ft of cumulative forward travel, pick a random angle 
+        +/-15 deg and rotate by that amount before going forward again.
+        Be sure to reset it after each turn too :P
         """
         if self.wandering:
             rotated = abs(self._angle_diff(self.current_yaw, self.wander_start_yaw))
@@ -412,18 +387,16 @@ class ReactiveController(Node):
 
     def _behavior_drive(self) -> Twist:
         """
-        Priority 6 – DRIVE
-        Lowest-priority fallback: drive forward.
+        Priority 6: Drive
+        Drive forward as a fallback to all else
         """
         return self._twist(vx=self.forward_speed, wz=0.0)
 
-    # -----------------------------------------------------------------------
-    # Control loop
-    # -----------------------------------------------------------------------
+    # Control goes through the priority list now!!
 
     def tick(self) -> None:
         """
-        Evaluate behaviors in strict priority order.
+        Evaluate behaviors in priority order
         """
         cmd = (
             self._behavior_halt()
@@ -436,9 +409,7 @@ class ReactiveController(Node):
         self.publish_twist(cmd)
 
 
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
+# Main program stuff with Python :3
 
 def main():
     rclpy.init()
